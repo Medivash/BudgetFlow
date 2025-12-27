@@ -4,6 +4,7 @@ import com.budgetflow.dto.AddExpensesDto;
 import com.budgetflow.dto.EditExpensesDto;
 import com.budgetflow.dto.ListExpensesDto;
 import com.budgetflow.entity.ExpensesEntity;
+import com.budgetflow.enums.Category;
 import com.budgetflow.repository.Expenses;
 import com.budgetflow.service.ExpensesService;
 import lombok.RequiredArgsConstructor;
@@ -53,4 +54,8 @@ public class ExpensesServiceImpl implements ExpensesService {
         repository.save(entity);
     }
 
+    @Override
+    public List<String> getCategory() {
+        return List.of(Category.DINNER.name(), Category.FRIDAY.name(), Category.GROCERIES.name());
+    }
 }

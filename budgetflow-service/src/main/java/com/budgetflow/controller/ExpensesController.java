@@ -20,43 +20,32 @@ public class ExpensesController {
     private final ExpensesService expensesService;
 
     @PostMapping("/add")
-    public void addExpenses (@RequestBody AddExpensesDto dto) {
+    public void addExpenses(@RequestBody AddExpensesDto dto) {
         expensesService.addExpenses(dto);
     }
 
     @GetMapping("get/{id}")
-    public ExpensesEntity getExpenses (@PathVariable long id) {
+    public ExpensesEntity getExpenses(@PathVariable long id) {
         return expensesService.getExpenses(id);
     }
 
     @PostMapping("/list")
-    public List<ExpensesEntity> listExpenses (@RequestBody ListExpensesDto dto) {
+    public List<ExpensesEntity> listExpenses(@RequestBody ListExpensesDto dto) {
         return expensesService.listExpenses(dto);
     }
 
     @PutMapping("/edit")
-    public void editExpenses (@RequestBody EditExpensesDto dto) {
+    public void editExpenses(@RequestBody EditExpensesDto dto) {
         expensesService.editExpenses(dto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteExpenses(@PathVariable long id){
+    public void deleteExpenses(@PathVariable long id) {
         expensesService.deleteExpenses(id);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-//    @PostMapping("/plan")
-//    public void planExpenses(@RequestBody PlanExpensesDto dto){
-//
-//    }
+    @GetMapping("/category")
+    public List<String> getCategory() {
+        return expensesService.getCategory();
+    }
 }
