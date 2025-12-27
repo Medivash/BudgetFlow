@@ -3,6 +3,9 @@ package com.budgetflow.entity;
 import com.budgetflow.enums.Category;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,4 +25,8 @@ public class ExpensesEntity {
     private Category category;
 
     private long expenses;
+
+    @CreationTimestamp
+    @Column(name = "expenses_date", nullable = false)
+    private LocalDateTime expensesDate;
 }
