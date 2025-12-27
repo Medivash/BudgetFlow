@@ -19,4 +19,6 @@ public interface ExpensesService {
 
     void editExpenses(EditExpensesDto dto);
 
+    List<String> getCategory();
+
 }
