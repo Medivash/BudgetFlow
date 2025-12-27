@@ -9,6 +9,7 @@ create table expenses
 
 CREATE SEQUENCE expenses_seq start 1;
 
-comment on table expenses is 'qwe';
+comment on table expenses is 'Таблица внесения расходов по категориям';
 comment on column expenses.id is 'id';
--- todo desc
+comment on column expenses.category is 'Категория расхода';
+comment on column expenses.expenses is 'Величниа расхода';
