@@ -2,10 +2,12 @@ package com.budgetflow.service.impl;
 
 import com.budgetflow.dto.AddExpensesDto;
 import com.budgetflow.dto.EditExpensesDto;
+import com.budgetflow.dto.GetExpensesDto;
 import com.budgetflow.dto.ListExpensesDto;
+import com.budgetflow.entity.CategoriesEntity;
 import com.budgetflow.entity.ExpensesEntity;
-import com.budgetflow.enums.Category;
-import com.budgetflow.repository.Expenses;
+import com.budgetflow.repository.CategoryRepository;
+import com.budgetflow.repository.ExpensesRepository;
 import com.budgetflow.service.ExpensesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,45 +19,56 @@ import java.util.List;
 @Service
 public class ExpensesServiceImpl implements ExpensesService {
 
-    private final Expenses repository;
+    private final ExpensesRepository expensesRepository;
+    private final CategoryRepository categoryRepository;
+
 
     @Override
     public void addExpenses(AddExpensesDto dto) {
+        CategoriesEntity categoriesEntity = categoryRepository.findByCategory(dto.getCategory());
         ExpensesEntity entity = ExpensesEntity
                 .builder()
-                .category(dto.getCategory())
+                .category(categoriesEntity)
                 .expenses(dto.getExpenses())
                 .build();
-        repository.save(entity);
+        expensesRepository.save(entity);
     }
 
     @Override
-    public ExpensesEntity getExpenses(long id) {
-        return repository.findById(id).orElseThrow();
+    public GetExpensesDto getExpenses(long id) {
+        ExpensesEntity expensesEntity = expensesRepository.findById(id).orElseThrow();
+        return GetExpensesDto
+                .builder()
+                .category(expensesEntity.getCategory().getCategory())
+                .expenses(expensesEntity.getExpenses())
+                .date(expensesEntity.getExpensesDate())
+                .build();
     }
 
     @Override
     public List<ExpensesEntity> listExpenses(ListExpensesDto dto) {
-        return repository.findAllByCategory(dto.getCategory());
+        CategoriesEntity categoriesEntity = categoryRepository.findByCategory(dto.getCategory());
+        return expensesRepository.findAllByCategoryId(categoriesEntity.getId());
     }
 
     @Override
     public void deleteExpenses(long id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
+        if (expensesRepository.existsById(id)) {
+            expensesRepository.deleteById(id);
         }
     }
 
     @Override
     public void editExpenses(EditExpensesDto dto) {
-        ExpensesEntity entity = repository.findById(dto.getId()).orElseThrow();
+        CategoriesEntity categoriesEntity = categoryRepository.findByCategory(dto.getCategory());
+        ExpensesEntity entity = expensesRepository.findById(dto.getId()).orElseThrow();
         entity.setExpenses(dto.getExpenses());
-        entity.setCategory(dto.getCategory());
-        repository.save(entity);
+        entity.setCategory(categoriesEntity);
+        expensesRepository.save(entity);
     }
 
     @Override
-    public List<String> getCategory() {
-        return List.of(Category.DINNER.name(), Category.FRIDAY.name(), Category.GROCERIES.name());
+    public List<CategoriesEntity> getCategory() {
+        return categoryRepository.findAll();
     }
 }

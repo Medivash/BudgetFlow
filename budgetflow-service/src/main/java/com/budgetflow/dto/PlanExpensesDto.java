@@ -1,5 +1,4 @@
 package com.budgetflow.dto;
-import com.budgetflow.enums.Category;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -15,7 +14,7 @@ public class PlanExpensesDto {
     private LocalDate dateFinish;
 
     @NotNull
-    private Category category;
+    private String category;
 
     @NotNull
     private long planedExpens;

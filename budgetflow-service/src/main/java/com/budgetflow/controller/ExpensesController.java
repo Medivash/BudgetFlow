@@ -2,7 +2,9 @@ package com.budgetflow.controller;
 
 import com.budgetflow.dto.AddExpensesDto;
 import com.budgetflow.dto.EditExpensesDto;
+import com.budgetflow.dto.GetExpensesDto;
 import com.budgetflow.dto.ListExpensesDto;
+import com.budgetflow.entity.CategoriesEntity;
 import com.budgetflow.entity.ExpensesEntity;
 import com.budgetflow.service.ExpensesService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,7 +27,7 @@ public class ExpensesController {
     }
 
     @GetMapping("get/{id}")
-    public ExpensesEntity getExpenses(@PathVariable long id) {
+    public GetExpensesDto getExpenses(@PathVariable long id) {
         return expensesService.getExpenses(id);
     }
 
@@ -45,7 +47,7 @@ public class ExpensesController {
     }
 
     @GetMapping("/category")
-    public List<String> getCategory() {
+    public List<CategoriesEntity> getCategory() {
         return expensesService.getCategory();
     }
 }
