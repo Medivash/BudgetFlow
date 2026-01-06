@@ -1,9 +1,6 @@
 package com.budgetflow.service;
 
-import com.budgetflow.dto.AddExpensesDto;
-import com.budgetflow.dto.EditExpensesDto;
-import com.budgetflow.dto.GetExpensesDto;
-import com.budgetflow.dto.ListExpensesDto;
+import com.budgetflow.dto.*;
 import com.budgetflow.entity.CategoriesEntity;
 import com.budgetflow.entity.ExpensesEntity;
 
@@ -22,5 +19,7 @@ public interface ExpensesService {
     void editExpenses(EditExpensesDto dto);
 
     List<CategoriesEntity> getCategory();
+
+    void addCategory(AddCategoryDto dto);
 
 }
