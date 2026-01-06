@@ -1,10 +1,10 @@
 package com.budgetflow.entity;
 
-import com.budgetflow.enums.Category;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,15 +14,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "expenses")
-public class ExpensesEntity {
+public class ExpensesEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expenses_seq")
     @SequenceGenerator(name = "expenses_seq", sequenceName = "expenses_seq", allocationSize = 1)
     private long id;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    private CategoriesEntity category;
 
     private long expenses;
 

@@ -1,12 +1,16 @@
 package com.budgetflow.dto;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
-public class EditExpensesDto {
+@Builder
+public class GetExpensesDto {
 
     @NotNull
     private long expenses;
@@ -15,5 +19,5 @@ public class EditExpensesDto {
     private String category;
 
     @NotNull
-    private long id;
+    private LocalDateTime date;
 }
