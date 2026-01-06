@@ -1,9 +1,6 @@
 package com.budgetflow.controller;
 
-import com.budgetflow.dto.AddExpensesDto;
-import com.budgetflow.dto.EditExpensesDto;
-import com.budgetflow.dto.GetExpensesDto;
-import com.budgetflow.dto.ListExpensesDto;
+import com.budgetflow.dto.*;
 import com.budgetflow.entity.CategoriesEntity;
 import com.budgetflow.entity.ExpensesEntity;
 import com.budgetflow.service.ExpensesService;
@@ -50,4 +47,10 @@ public class ExpensesController {
     public List<CategoriesEntity> getCategory() {
         return expensesService.getCategory();
     }
+
+    @PostMapping("/add/category")
+    public void addCategory(@RequestBody AddCategoryDto dto){
+        expensesService.addCategory(dto);
+    }
+
 }

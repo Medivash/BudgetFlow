@@ -1,9 +1,6 @@
 package com.budgetflow.service.impl;
 
-import com.budgetflow.dto.AddExpensesDto;
-import com.budgetflow.dto.EditExpensesDto;
-import com.budgetflow.dto.GetExpensesDto;
-import com.budgetflow.dto.ListExpensesDto;
+import com.budgetflow.dto.*;
 import com.budgetflow.entity.CategoriesEntity;
 import com.budgetflow.entity.ExpensesEntity;
 import com.budgetflow.repository.CategoryRepository;
@@ -70,5 +67,14 @@ public class ExpensesServiceImpl implements ExpensesService {
     @Override
     public List<CategoriesEntity> getCategory() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public void addCategory(AddCategoryDto dto) {
+        CategoriesEntity categoriesEntity = CategoriesEntity
+                .builder()
+                .category(dto.getCategory())
+                .build();
+        categoryRepository.save(categoriesEntity);
     }
 }
