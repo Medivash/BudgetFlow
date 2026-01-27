@@ -63,18 +63,4 @@ public class ExpensesServiceImpl implements ExpensesService {
         entity.setCategory(categoriesEntity);
         expensesRepository.save(entity);
     }
-
-    @Override
-    public List<CategoriesEntity> getCategory() {
-        return categoryRepository.findAll();
-    }
-
-    @Override
-    public void addCategory(AddCategoryDto dto) {
-        CategoriesEntity categoriesEntity = CategoriesEntity
-                .builder()
-                .category(dto.getCategory())
-                .build();
-        categoryRepository.save(categoriesEntity);
-    }
 }
