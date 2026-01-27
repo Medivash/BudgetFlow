@@ -42,15 +42,4 @@ public class ExpensesController {
     public void deleteExpenses(@PathVariable long id) {
         expensesService.deleteExpenses(id);
     }
-
-    @GetMapping("/category")
-    public List<CategoriesEntity> getCategory() {
-        return expensesService.getCategory();
-    }
-
-    @PostMapping("/add/category")
-    public void addCategory(@RequestBody AddCategoryDto dto){
-        expensesService.addCategory(dto);
-    }
-
 }
